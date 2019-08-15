@@ -1,0 +1,51 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" type="text/css" href="https://app.verixapi.com/connect.css">
+    <script src="https://app.verixapi.com/connect.js"></script>
+    <script>
+      const load = () => {
+        const configuration = {
+          clientId: "INSERT_PROJECT_CLIENT_ID",
+          environment: "sandbox",
+          optionalData: {
+            name: {
+              first: "Homer",
+              last: "Simpson"
+            },
+            birthdate: {
+              month: 5,
+              day: 12,
+              year: 1956
+            },
+            mobileNumber: "9395550113",
+            socialSecurityNumber: "435420097",
+            filingAddress: {
+              address: "742 Evergreen Terrace",
+              address2: "Unit 1",
+              city: "Springfield",
+              state: "OR",
+              zip: "97403"
+            },
+            filingStatus: "Married Filing Jointly"
+          }
+        };
+        const verix = new Verix(configuration);
+        verix.launch();
+        verix.success(function(results) {
+          console.log('User successfully completed connect flow!');
+          console.log('Authorization Code: ' + results.code);
+          console.log('Expires At: ' + new Date(results.expirationAt * 1000));
+        });
+        verix.cancel(function() {
+          console.log("User closed modal");
+        });
+      } 
+      window.onload = load; 
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
